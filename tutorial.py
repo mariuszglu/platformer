@@ -17,7 +17,11 @@ window = pygame.display.set_mode((WIDTH,HEIGHT))
 
 
 def main(window):
-    pass
+    clock = pygame.time.Clock()
+
+    run = True
+    while run:
+        clock.tick(FPS)
 
 
 if __name__ == "__main__":
