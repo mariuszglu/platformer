@@ -9,7 +9,7 @@ pygame.init()
 pygame.display.set_caption("Platformer")
 
 BG_COLOR = (255, 255, 255)
-WIDTH, HEIGHT = 1000, 700
+WIDTH, HEIGHT = 1000, 680
 FPS = 60
 PLAYER_VEL = 5
 
@@ -26,6 +26,12 @@ def get_background(name):
             tiles.append(pos)
     return tiles, image
 
+def draw(window, background, bg_image):
+    for tile in background:
+        window.blit(bg_image, tile)
+
+    pygame.display.update()
+
 
 
 
@@ -41,7 +47,8 @@ def main(window):
             if event.type == pygame.QUIT:
                 run = False
                 break
-
+        
+        draw(window, background, bg_image)
 
 if __name__ == "__main__":
     main(window)
