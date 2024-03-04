@@ -44,7 +44,10 @@ class Player(pygame.sprite.Sprite):
     #Sprite is accurate in the event of collisions
     COLOR = (255, 0, 0)
     GRAVITY = 1 #begining acceleration gravity
-    
+
+    #grab all images
+    SPRITES = load_sprite_sheets("MainCharacters", "MaskDude", 32, 32, True)
+
     def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
         self.x_vel = 0 #velocity
