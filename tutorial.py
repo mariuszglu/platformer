@@ -37,6 +37,9 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
         if direction:
             all_sprites[image.replace(".png", "") + "_right"] = sprites
             all_sprites[image.replace(".png", "") + "_left"] = flip(sprites)
+        else:
+            all_sprites[image.replace(".png", "")] = sprites
+    return all_sprites
             
 
 
@@ -74,14 +77,17 @@ class Player(pygame.sprite.Sprite):
             self.animation_count = 0
     
     def loop(self,fps):
-        self.y_vel += min(1, (self.fall_count / fps) * self.GRAVITY)
+        # self.y_vel += min(1, (self.fall_count / fps) * self.GRAVITY)
         self.move(self.x_vel, self.y_vel)
 
         self.fall_count +=1
 
 
     def draw(self, win):
-        pygame.draw.rect(win, self.COLOR, self.rect)
+        # pygame.draw.rect(win, self.COLOR, self.rect)
+        # self.sprite = self.SPRITES["idle"][0]
+        self.sprite = self.SPRITES["idle_" + self.direction][0]
+        win.blit(self.sprite, (self.rect.x, self.rect.y))
 
 
 
