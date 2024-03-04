@@ -20,6 +20,7 @@ window = pygame.display.set_mode((WIDTH,HEIGHT))
 class Player(pygame.sprite.Sprite):
     #Sprite is accurate in the event of collisions
     COLOR = (255, 0, 0)
+    GRAVITY = 1 #begining acceleration gravity
 
     def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
@@ -28,6 +29,7 @@ class Player(pygame.sprite.Sprite):
         self.mask = None
         self.direction = "left"
         self.animation_count = 0
+        self.fall_count = 0 #this tell as how long being in the air how long being fall
     
     def move(self, dx, dy):
         self.rect.x += dx
@@ -46,7 +48,11 @@ class Player(pygame.sprite.Sprite):
             self.animation_count = 0
     
     def loop(self,fps):
+        self.y_vel += min(1, (self.fall_count / fps) * self.GRAVITY)
         self.move(self.x_vel, self.y_vel)
+
+        self.fall_count +=1
+
 
     def draw(self, win):
         pygame.draw.rect(win, self.COLOR, self.rect)
