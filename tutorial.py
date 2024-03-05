@@ -11,7 +11,7 @@ pygame.display.set_caption("Platformer")
 BG_COLOR = (255, 255, 255)
 WIDTH, HEIGHT = 1000, 680
 FPS = 60
-PLAYER_VEL = 5
+PLAYER_VEL = 3
 
 window = pygame.display.set_mode((WIDTH,HEIGHT))
 
@@ -95,6 +95,11 @@ class Player(pygame.sprite.Sprite):
         sprite_index = (self.animation_count // self.ANIMATION_DELEY) % len(sprites)
         self.sprite = sprites[sprite_index]
         self.animation_count += 1
+
+    def update(self):
+        self.rect = self.sprite.get_rect(topleft=(self.rect.x, self.rect.y))
+        self.mask = pygame.mask.from_surface(self.sprite)
+
 
     def draw(self, win):
         # pygame.draw.rect(win, self.COLOR, self.rect)
