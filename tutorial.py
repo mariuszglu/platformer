@@ -53,6 +53,7 @@ class Player(pygame.sprite.Sprite):
     ANIMATION_DELEY = 3
 
     def __init__(self, x, y, width, height):
+        super().__init__()
         self.rect = pygame.Rect(x, y, width, height)
         self.x_vel = 0 #velocity
         self.y_vel = 0
@@ -108,8 +109,24 @@ class Player(pygame.sprite.Sprite):
         # self.sprite = self.SPRITES["idle_" + self.direction][0] __ remove
         win.blit(self.sprite, (self.rect.x, self.rect.y))
 
+class Object(pygame.sprite.Sprite):
+    def __init__(self, x, y, width, height, name=None):
+        super().__init__()
+        self.rect = pygame.Rect(x, y, width, height)
+        self.image = pygame.Surface((width, height), pygame.SRCALPHA)
+        self.width = width
+        self.height = height
+        self.name = name
+    
+    def draw(self, win):
+        win.blit(self.image, (self.rect.x, self.rect.y))
 
-
+class Block(Object):
+    def __init__(self, x, y, size):
+        super().__init__(x, y, size, size)
+        block = get_block(size)
+        self.image.blit(block, (0, 0))
+        self.mask = pygame.mask.from_surface(self.image)
 
 def get_background(name):
     image = pygame.image.load(join("assets", "Background",name))
