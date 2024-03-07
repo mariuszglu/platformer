@@ -99,7 +99,7 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.rect = self.sprite.get_rect(topleft=(self.rect.x, self.rect.y))
         self.mask = pygame.mask.from_surface(self.sprite)
-
+        # Sprite using abow rectangle and mask
 
     def draw(self, win):
         # pygame.draw.rect(win, self.COLOR, self.rect)
