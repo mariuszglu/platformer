@@ -91,6 +91,15 @@ class Player(pygame.sprite.Sprite):
 
         self.fall_count +=1
         self.update_sprite()
+    
+    def landed(self):
+        self.fall_count = 0
+        self.y_vel = 0
+        self.jump_count = 0
+
+    def hit_head(self):
+        self.count = 0
+        self.y_vel += -1
 
 
     def update_sprite(self):
@@ -156,7 +165,7 @@ def draw(window, background, bg_image, player, objects):
     player.draw(window)
 
     pygame.display.update()
-    
+
 
 def handle_vertical_collision(player, objects, dy):
     collided_objects = []
