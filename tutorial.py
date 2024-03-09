@@ -166,7 +166,7 @@ def draw(window, background, bg_image, player, objects):
 
     pygame.display.update()
 
-
+# pixel perfect collision (vertical)
 def handle_vertical_collision(player, objects, dy):
     collided_objects = []
     for obj in objects:
