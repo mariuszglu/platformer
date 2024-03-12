@@ -11,7 +11,7 @@ pygame.display.set_caption("Platformer")
 BG_COLOR = (255, 255, 255)
 WIDTH, HEIGHT = 1000, 680
 FPS = 60
-PLAYER_VEL = 3
+PLAYER_VEL = 5
 
 window = pygame.display.set_mode((WIDTH,HEIGHT))
 
@@ -107,7 +107,7 @@ class Player(pygame.sprite.Sprite):
 
     def hit_head(self):
         self.count = 0
-        self.y_vel += -1
+        self.y_vel *= -1
 
 
     def update_sprite(self):
@@ -217,8 +217,8 @@ def handle_move(player, objects):
 
     player.x_vel = 0
 
-    collide_left = collide(player, objects, -PLAYER_VEL)
-    collide_right = collide(player, objects, PLAYER_VEL)
+    collide_left = collide(player, objects, -PLAYER_VEL * 2)
+    collide_right = collide(player, objects, PLAYER_VEL * 2)
 
     if keys[pygame.K_LEFT]  and not collide_left:
         player.move_left(PLAYER_VEL)
@@ -236,7 +236,7 @@ def main(window):
     # blocks = [Block(0, HEIGHT - block_size, block_size)]
     floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-WIDTH // block_size, (WIDTH * 2) // block_size)]
     objects = [*floor, Block(0, HEIGHT - block_size * 2, block_size),
-               Block(block_size * 3, HEIGHT - block_size * 4, block_size)]
+               Block(block_size * 1.5, HEIGHT - block_size * 4, block_size)]
 
     offset_x = 0
     scroll_area_width = 200 #200px
