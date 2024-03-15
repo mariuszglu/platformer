@@ -163,6 +163,19 @@ class Block(Object):
         self.image.blit(block, (0, 0))
         self.mask = pygame.mask.from_surface(self.image)
 
+class Fire(Object):
+    ANIMATION_DELAY = 3
+
+    def __init__(self, x, y, width, height):
+        super.__init__(self, x, y, width, height, "fire")
+        self.fire = load_sprite_sheets("Traps", "Fire", width, height)
+        self.image = self.fire["off"][0]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.animation_count = 0
+        self.animation_name = "off"
+
+    
+
 def get_background(name):
     image = pygame.image.load(join("assets", "Background",name))
     _, _, width, height = image.get_rect()
@@ -236,7 +249,7 @@ def main(window):
     # blocks = [Block(0, HEIGHT - block_size, block_size)]
     floor = [Block(i * block_size, HEIGHT - block_size, block_size) for i in range(-WIDTH // block_size, (WIDTH * 2) // block_size)]
     objects = [*floor, Block(0, HEIGHT - block_size * 2, block_size),
-               Block(block_size * 1.5, HEIGHT - block_size * 4, block_size)]
+               Block(block_size, HEIGHT - block_size * 2, block_size)]
 
     offset_x = 0
     scroll_area_width = 200 #200px
