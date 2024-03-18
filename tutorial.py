@@ -68,6 +68,8 @@ class Player(pygame.sprite.Sprite):
         self.direction = "left"
         self.animation_count = 0
         self.fall_count = 0 #this tell as how long being in the air how long being fall
+        self.hit = False
+        self.hit_count
     
     def jump(self):
         self.y_vel = -self.GRAVITY * 8
@@ -80,6 +82,11 @@ class Player(pygame.sprite.Sprite):
     def move(self, dx, dy):
         self.rect.x += dx
         self.rect.y += dy
+
+    def hit(self):
+        self.hit = True
+        self.hit_count = 0
+
     
     def move_left(self, vel):
         self.x_vel = -vel
@@ -96,6 +103,11 @@ class Player(pygame.sprite.Sprite):
     def loop(self,fps):
         self.y_vel += min(1, (self.fall_count / fps) * self.GRAVITY)
         self.move(self.x_vel, self.y_vel)
+
+        if self.hit:
+            self.hit_count += 1
+        if self.hit_count > fps * 2:
+            self.hit = False
 
         self.fall_count +=1
         self.update_sprite()
